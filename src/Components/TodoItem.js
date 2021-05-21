@@ -1,7 +1,6 @@
 import React from 'react'
 
 const TodoItem = (props) => {
-    console.log(props);
     return (
         <div className='alert alert-info'>
             <h4>{props.task.title}</h4>
