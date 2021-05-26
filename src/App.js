@@ -3,7 +3,7 @@ import Navigation from './Components/Navigation';
 import Todos from './Components/Todos';
 import Footer from './Components/Footer';
 import AddTodo from './Components/AddTodo'
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 console.log(window.localStorage);
 
@@ -15,7 +15,7 @@ function App() {
   else {
     initTodos = JSON.parse(localStorage.getItem('todos'));
   }
-  const [task, setTask] = useState([]);
+  const [task, setTask] = useState(initTodos);
   const deleteHandler = (target) => {
     setTask(task.filter((t) => {
       return t !== target
@@ -44,6 +44,10 @@ function App() {
       localStorage.setItem('tasks', JSON.stringify(task));
     }
   };
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(task));
+  }, [task])
+
   return (
     <div>
       <Navigation title="To Do List" searchBar={true} />
